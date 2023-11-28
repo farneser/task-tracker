@@ -21,3 +21,44 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: rabbitmq
       RABBITMQ_DEFAULT_PASS: rabbitmq
+  api:
+    image: farneser/task-tracker-api:latest
+    container_name: api-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: task-tracker
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+      JWT_SECRET: F40BB648F9CA2303F6878ACD7CF446A28845426C508BF3CBC06740AD892D7B9B # example 256-bit key
+      USE_SWAGGER: true
+      SERVER_PORT: 8080
+      LOGGING_LEVEL: INFO
+      ALLOWED_ORIGINS: http://localhost:3000, http://client:3000
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: rabbitmq
+      RABBITMQ_PASSWORD: rabbitmq
+  scheduler:
+    image: farneser/task-tracker-scheduler:latest
+    container_name: scheduler-container
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: task-tracker
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: rabbitmq
+      RABBITMQ_PASSWORD: rabbitmq
+      SCHEDULER_CRON: "0 0 0 * * *" # every day at midnight
+      LOG_LEVEL: INFO
