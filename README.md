@@ -12,7 +12,7 @@
 * [Web API реализующий бизнес логику приложения](https://github.com/farneser/task-tracker-api)
 * [React клиент](https://github.com/farneser/task-tracker-client)
 * [Сервис отправки email сообщений](https://github.com/farneser/task-tracker-email-sender)
-* [Сервис обработки ежедневной рассылки статистики](https://github.com/farneser/task-tracker-scheduler)
+* [Сервис сбора статистики по расписанию](https://github.com/farneser/task-tracker-scheduler)
 
 ## Стек технологий
 
