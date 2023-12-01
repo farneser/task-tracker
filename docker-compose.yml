@@ -62,3 +62,17 @@ services:
       RABBITMQ_PASSWORD: rabbitmq
       SCHEDULER_CRON: "0 0 0 * * *" # every day at midnight
       LOG_LEVEL: INFO
+  email-sender:
+    image: farneser/task-tracker-email-sender:latest
+    container_name: email-sender-container
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: rabbitmq
+      RABBITMQ_PASSWORD: rabbitmq
+      MAIL_HOST: smtp.gmail.com
+      MAIL_PORT: 456
+      MAIL_USERNAME: YOUR.EMAIL.ADDRESS
+      MAIL_PASSWORD: YOUR.EMAIL.PASSWORD
