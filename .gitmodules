@@ -1,0 +1,12 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/farneser/task-tracker-api
+[submodule "client"]
+	path = client
+	url = https://github.com/farneser/task-tracker-client
+[submodule "email-sender"]
+	path = email-sender
+	url = https://github.com/farneser/task-tracker-email-sender
+[submodule "scheduler"]
+	path = scheduler
+	url = https://github.com/farneser/task-tracker-scheduler
