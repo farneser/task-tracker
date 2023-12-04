@@ -74,6 +74,7 @@ requires:
 
 - [PostgreSQL](https://www.postgresql.org/)
 - [RabbitMQ](https://www.rabbitmq.com/)
+- [Redis](https://redis.io/)
 
 | Parameter              | Default value                               | Description                                                                 |
 |------------------------|---------------------------------------------|-----------------------------------------------------------------------------|
@@ -135,3 +136,10 @@ requires:
 | MAIL_PORT     | `587`            | Mail server port     |
 | MAIL_USERNAME |                  | Mail server username |
 | MAIL_PASSWORD |                  | Mail server password |
+
+### Redis
+
+| Parameter  | Default value | Description       |
+|------------|---------------|-------------------|
+| REDIS_HOST | `locahost`    | Redis server host |
+| REDIS_PORT | `6379`        | Redis server port |
