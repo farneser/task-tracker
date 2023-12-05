@@ -74,6 +74,7 @@ requires:
 
 - [PostgreSQL](https://www.postgresql.org/)
 - [RabbitMQ](https://www.rabbitmq.com/)
+- [Redis](https://redis.io/)
 
 | Parameter              | Default value                               | Description                                                                 |
 |------------------------|---------------------------------------------|-----------------------------------------------------------------------------|
@@ -104,9 +105,10 @@ requires:
 - [RabbitMQ](https://www.rabbitmq.com/)
 - SMTP server
 
-| Parameter | Default value | Description                      |
-|-----------|---------------|----------------------------------|
-| LOG_LEVEL | INFO          | Spring application logging level |
+| Parameter               | Default value                          | Description                              |
+|-------------------------|----------------------------------------|------------------------------------------|
+| LOG_LEVEL               | INFO                                   | Spring application logging level         |
+| CLIENT_CONFIRMATION_URL | `http://localhost:3000/confirm?token=` | URL for client confirmation (with query) |
 
 ### Postgres
 
@@ -135,3 +137,10 @@ requires:
 | MAIL_PORT     | `587`            | Mail server port     |
 | MAIL_USERNAME |                  | Mail server username |
 | MAIL_PASSWORD |                  | Mail server password |
+
+### Redis
+
+| Parameter  | Default value | Description       |
+|------------|---------------|-------------------|
+| REDIS_HOST | `locahost`    | Redis server host |
+| REDIS_PORT | `6379`        | Redis server port |

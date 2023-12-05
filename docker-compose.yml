@@ -1,8 +1,8 @@
 version: '3'
 services:
-  postgres:
+  default-db:
     image: postgres:latest
-    container_name: postgres-container
+    container_name: tt-postgres-container
     ports:
       - "5432:5432"
     environment:
@@ -12,37 +12,42 @@ services:
     volumes:
       - ./data/postgres-data:/var/lib/postgresql/data
       - ./data/init-scripts:/docker-entrypoint-initdb.d
-  rabbitmq:
+  message-broker:
     image: rabbitmq:3-management
-    container_name: rabbitmq-container
+    container_name: tt-rabbitmq-container
     ports:
       - "5672:5672"  # AMQP
       - "15672:15672"  # RabbitMQ Management
     environment:
       RABBITMQ_DEFAULT_USER: rabbitmq
       RABBITMQ_DEFAULT_PASS: rabbitmq
+  memory-db:
+    image: redis:latest
+    container_name: tt-redis-container
+    ports:
+      - "6379:6379"
   api:
     image: farneser/task-tracker-api:latest
-    container_name: api-container
+    container_name: tt-api-container
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
-      - rabbitmq
+      - default-db
+      - message-broker
     env_file:
       - .env
   scheduler:
     image: farneser/task-tracker-scheduler:latest
-    container_name: scheduler-container
+    container_name: tt-scheduler-container
     depends_on:
-      - postgres
-      - rabbitmq
+      - default-db
+      - message-broker
     env_file:
       - .env
   email-sender:
     image: farneser/task-tracker-email-sender:latest
-    container_name: email-sender-container
+    container_name: tt-email-sender-container
     depends_on:
-      - rabbitmq
+      - message-broker
     env_file:
       - .env
