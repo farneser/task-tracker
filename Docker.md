@@ -105,9 +105,10 @@ requires:
 - [RabbitMQ](https://www.rabbitmq.com/)
 - SMTP server
 
-| Parameter | Default value | Description                      |
-|-----------|---------------|----------------------------------|
-| LOG_LEVEL | INFO          | Spring application logging level |
+| Parameter               | Default value                          | Description                              |
+|-------------------------|----------------------------------------|------------------------------------------|
+| LOG_LEVEL               | INFO                                   | Spring application logging level         |
+| CLIENT_CONFIRMATION_URL | `http://localhost:3000/confirm?token=` | URL for client confirmation (with query) |
 
 ### Postgres
 
