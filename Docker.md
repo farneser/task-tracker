@@ -81,9 +81,9 @@ requires:
 | JWT_SECRET             |                                             | Secret key for JSON Web Token (JWT) authentication                          |
 | JWT_EXPIRATION_ACCESS  | `120000`                                    | Expiration time for access JWT tokens (in milliseconds) 2 min by default    |
 | JWT_EXPIRATION_REFRESH | `1209600000`                                | Expiration time for refresh JWT tokens (in milliseconds) 14 days by default |
-| LOG_LEVEL              | `INFO`                                      | Logging level for the application                                           |
+| API_LOG_LEVEL          | `INFO`                                      | Logging level for the application                                           |
 | SERVER_PORT            | `8080`                                      | Port on which the server is running                                         |
-| USE_SWAGGER            | true                                        | Enable/disable Swagger UI for API documentation                             |
+| USE_SWAGGER            | `true`                                      | Enable/disable Swagger UI for API documentation                             |
 | ALLOWED_ORIGINS        | `http://localhost:3000, http://client:3000` | Comma-separated list of allowed origins for CORS                            |
 
 ### Scheduler [repository](https://github/farneser/task-tracker-scheduler)
@@ -93,10 +93,12 @@ requires:
 - [PostgreSQL](https://www.postgresql.org/)
 - [RabbitMQ](https://www.rabbitmq.com/)
 
-| Parameter      | Default value | Description                                     |
-|----------------|---------------|-------------------------------------------------|
-| SCHEDULER_CRON | 0 0 0 * * *   | Scheduler cron expression (default at midnight) |
-| LOG_LEVEL      | INFO          | Spring application logging level                |
+| Parameter                         | Default value  | Description                                     |
+|-----------------------------------|----------------|-------------------------------------------------|
+| SCHEDULER_CRON                    | `0 0 0 * * *`  | Scheduler cron expression (default at midnight) |
+| SCHEDULER_LOG_LEVEL               | `INFO`         | Spring application logging level                |
+| SCHEDULER_TIMEZONE                | `Europe/Minsk` | Scheduler timezone                              |
+| SCHEDULER_ARCHIVED_COLUMN_ENABLED | `false`        | Enable/disable archived column in statistics    |
 
 ### Email sender [repository](https://github/farneser/task-tracker-email-sender)
 
@@ -107,7 +109,7 @@ requires:
 
 | Parameter               | Default value                          | Description                              |
 |-------------------------|----------------------------------------|------------------------------------------|
-| LOG_LEVEL               | INFO                                   | Spring application logging level         |
+| EMAIL_SENDER_LOG_LEVEL  | `INFO`                                 | Spring application logging level         |
 | CLIENT_CONFIRMATION_URL | `http://localhost:3000/confirm?token=` | URL for client confirmation (with query) |
 
 ### Postgres
