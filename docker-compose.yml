@@ -52,3 +52,12 @@ services:
       - message-broker
     env_file:
       - .env
+  client:
+    image: farneser/task-tracker-client:latest
+    container_name: tt-client-container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    env_file:
+      - .env
