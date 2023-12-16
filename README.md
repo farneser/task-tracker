@@ -25,3 +25,9 @@
 * [model mapper](https://modelmapper.org/)
 * [testcontainers](https://testcontainers.com/)
 * [swagger](https://swagger.io/)
+
+## Скриншоты
+
+![startup](assets/screenshot_1.png)
+![kanban](assets/screenshot_2.png)
+![archive](assets/screenshot_3.png)
