@@ -7,6 +7,8 @@ scalable and efficient solution. The application allows users to organize their 
 React-based client for a seamless user experience. The backend is implemented using Spring Boot, with additional
 features like a scheduler in Kotlin for task automation and an email sender for notifications.
 
+[Original specification](https://zhukovsd.github.io/java-backend-learning-course/Projects/TaskTracker/)
+
 ## Technologies Used
 
 - **Client (React):** The front end is built using React, providing a modern and responsive user interface for an
