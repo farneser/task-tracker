@@ -1,0 +1,28 @@
+version: '3'
+services:
+  default-db:
+    image: postgres:latest
+    container_name: tt-postgres-container
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ../postgres-data:/var/lib/postgresql/data
+      - ../init-scripts:/docker-entrypoint-initdb.d
+  message-broker:
+    image: rabbitmq:3-management
+    container_name: tt-rabbitmq-container
+    ports:
+      - "5672:5672"  # AMQP
+      - "15672:15672"  # RabbitMQ Management
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+  memory-db:
+    image: redis:latest
+    container_name: tt-redis-container
+    ports:
+      - "6379:6379"
