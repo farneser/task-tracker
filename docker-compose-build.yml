@@ -1,0 +1,85 @@
+version: '3'
+services:
+  default-db:
+    image: postgres:latest
+    container_name: tt-postgres-container
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./data/postgres-data:/var/lib/postgresql/data
+      - ./data/init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      task-tracker:
+  message-broker:
+    image: rabbitmq:3-management
+    container_name: tt-rabbitmq-container
+    ports:
+      - "5672:5672"  # AMQP
+      - "15672:15672"  # RabbitMQ Management
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+    networks:
+      task-tracker:
+  memory-db:
+    image: redis:latest
+    container_name: tt-redis-container
+    ports:
+      - "6379:6379"
+    networks:
+      task-tracker:
+  api:
+    build:
+      context: api
+    container_name: tt-api-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - default-db
+      - message-broker
+      - memory-db
+    env_file:
+      - .env
+    networks:
+      task-tracker:
+  scheduler:
+    build:
+      context: scheduler
+    container_name: tt-scheduler-container
+    depends_on:
+      - default-db
+      - message-broker
+    env_file:
+      - .env
+    networks:
+      task-tracker:
+  email-sender:
+    build:
+      context: email-sender
+    container_name: tt-email-sender-container
+    depends_on:
+      - message-broker
+    env_file:
+      - .env
+    networks:
+      task-tracker:
+  client:
+    build:
+      context: client
+    container_name: tt-client-container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    env_file:
+      - .env
+    networks:
+      task-tracker:
+
+networks:
+  task-tracker:
+    driver: bridge
