@@ -3,7 +3,7 @@ version: '3.8'
 services:
   default-db:
     image: postgres:latest
-    container_name: tt-postgres-container
+    container_name: tt-dev-postgres-container
     ports:
       - "5432:5432"
     environment:
@@ -15,7 +15,7 @@ services:
       - ../init-scripts:/docker-entrypoint-initdb.d
   pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: tt-pgadmin-container
+    container_name: tt-dev-pgadmin-container
     environment:
       PGADMIN_DEFAULT_EMAIL: "admin@email.com"
       PGADMIN_DEFAULT_PASSWORD: "admin"
@@ -33,7 +33,7 @@ services:
           memory: 1G
   message-broker:
     image: rabbitmq:3-management
-    container_name: tt-rabbitmq-container
+    container_name: tt-dev-rabbitmq-container
     ports:
       - "5672:5672"  # AMQP
       - "15672:15672"  # RabbitMQ Management
@@ -42,6 +42,6 @@ services:
       RABBITMQ_DEFAULT_PASS: rabbitmq
   memory-db:
     image: redis:latest
-    container_name: tt-redis-container
+    container_name: tt-dev-redis-container
     ports:
       - "6379:6379"
