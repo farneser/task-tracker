@@ -67,6 +67,61 @@ The microservices are deployed using Docker containers, with the following archi
 * [React](https://reactjs.org/): A JavaScript library for building user interfaces.
 * [TypeScript](https://www.typescriptlang.org/): A superset of JavaScript that adds static typing and other features.
 
+## Run default
+
+Main method of running this application is using docker-compose. Learn more about configuration in [Docker.md](Docker.md)
+
+### Run built image
+
+Run the application with the default configuration (docker compose is required). This will start the following services:
+
+1. Clone the repository
+
+    ```bash
+    git clone https://github.com/farneser/task-tracker && cd task-tracker
+    ```
+
+2. Run the application
+
+    ```bash
+    ./run.sh
+    ```
+
+3. Open the browser and go to [http://localhost:3000](http://localhost:3000)
+
+4. Stop and remove the containers
+
+    ```bash
+    ./run.sh stop
+    ```
+
+### Build locally
+
+1. Clone the repository
+
+    ```bash
+    git clone https://github.com/farneser/task-tracker --recurse-submodules && cd task-tracker
+    ```
+
+2. Run build docker compose
+
+    ```bash
+    docker-compose -f docker-compose-build.yml build
+    ```
+
+3. Run the application
+
+    ```bash
+    docker-compose -f docker-compose-build.yml up
+    ```
+
+4. Open the browser and go to [http://localhost:3000](http://localhost:3000)
+5. Stop and remove the containers
+
+    ```bash
+    docker-compose -f docker-compose-build.yml down -v
+    ```
+
 ## CI/DI
 
 As part of the project, an automated CI/CD process has been configured using GitHub Actions for each microservice. This
