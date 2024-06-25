@@ -6,6 +6,7 @@ services:
     container_name: tt-dev-postgres-container
     ports:
       - "5432:5432"
+    restart: unless-stopped
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: task-tracker
