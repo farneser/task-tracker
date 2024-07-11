@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  default-db:
+    image: postgres:latest
+    container_name: tt-dev-postgres-container
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: task-tracker
+      POSTGRES_PASSWORD: task-tracker
+    volumes:
+      - ../postgres-data:/var/lib/postgresql/data
+      - ../init-scripts:/docker-entrypoint-initdb.d
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: tt-dev-pgadmin-container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@email.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_SERVER_JSON_FILE: "/servers/servers.json"
+    volumes:
+      - ./pgadmin-servers:/servers
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+  message-broker:
+    image: rabbitmq:3-management
+    container_name: tt-dev-rabbitmq-container
+    ports:
+      - "5672:5672"  # AMQP
+      - "15672:15672"  # RabbitMQ Management
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+  memory-db:
+    image: redis:latest
+    container_name: tt-dev-redis-container
+    ports:
+      - "6379:6379"

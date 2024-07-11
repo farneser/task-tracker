@@ -7,8 +7,6 @@ scalable and efficient solution. The application allows users to organize their 
 React-based client for a seamless user experience. The backend is implemented using Spring Boot, with additional
 features like a scheduler in Kotlin for task automation and an email sender for notifications.
 
-[Original specification](https://zhukovsd.github.io/java-backend-learning-course/Projects/TaskTracker/)
-
 ## Technologies Used
 
 - **Client (React):** The front end is built using React, providing a modern and responsive user interface for an
@@ -69,24 +67,90 @@ The microservices are deployed using Docker containers, with the following archi
 * [React](https://reactjs.org/): A JavaScript library for building user interfaces.
 * [TypeScript](https://www.typescriptlang.org/): A superset of JavaScript that adds static typing and other features.
 
+## Run default
+
+Main method of running this application is using docker-compose. Learn more about configuration in [Docker.md](Docker.md)
+
+### Run built image
+
+Run the application with the default configuration (docker compose is required). This will start the following services:
+
+1. Clone the repository
+
+    ```bash
+    git clone https://github.com/farneser/task-tracker && cd task-tracker
+    ```
+
+2. Run the application
+
+    ```bash
+    ./run.sh
+    ```
+
+3. Open the browser and go to [http://localhost:3000](http://localhost:3000)
+
+4. Stop and remove the containers
+
+    ```bash
+    ./run.sh stop
+    ```
+
+### Build locally
+
+1. Clone the repository
+
+    ```bash
+    git clone https://github.com/farneser/task-tracker --recurse-submodules && cd task-tracker
+    ```
+
+2. Run build docker compose
+
+    ```bash
+    docker-compose -f docker-compose-build.yml build
+    ```
+
+3. Run the application
+
+    ```bash
+    docker-compose -f docker-compose-build.yml up
+    ```
+
+4. Open the browser and go to [http://localhost:3000](http://localhost:3000)
+5. Stop and remove the containers
+
+    ```bash
+    docker-compose -f docker-compose-build.yml down -v
+    ```
+
 ## CI/DI
 
 As part of the project, an automated CI/CD process has been configured using GitHub Actions for each microservice. This
 process ensures the automatic creation of Docker images and their upload to a shared repository (Docker Hub) when
 changes are made to the master branch.
 
-1. Web API:
-    * [![Maven build](https://github.com/farneser/task-tracker-api/actions/workflows/maven.yml/badge.svg)](https://github.com/farneser/task-tracker-api/actions/workflows/maven.yml)
-    * [![Docker Image build](https://github.com/farneser/task-tracker-api/actions/workflows/docker.yml/badge.svg)](https://github.com/farneser/task-tracker-api/actions/workflows/docker.yml)
-2. Scheduler:
-    * [![Maven build](https://github.com/farneser/task-tracker-scheduler/actions/workflows/maven.yml/badge.svg)](https://github.com/farneser/task-tracker-scheduler/actions/workflows/maven.yml)
-    * [![Docker Image Build](https://github.com/farneser/task-tracker-scheduler/actions/workflows/docker.yml/badge.svg)](https://github.com/farneser/task-tracker-scheduler/actions/workflows/docker.yml)
-3. Email Sender:
-    * [![Maven build](https://github.com/farneser/task-tracker-email-sender/actions/workflows/maven.yml/badge.svg)](https://github.com/farneser/task-tracker-email-sender/actions/workflows/maven.yml)
-    * [![Docker Image build](https://github.com/farneser/task-tracker-email-sender/actions/workflows/docker.yml/badge.svg)](https://github.com/farneser/task-tracker-email-sender/actions/workflows/docker.yml)
-4. Client:
-    * [![Build CI](https://github.com/farneser/task-tracker-client/actions/workflows/yarn.yml/badge.svg)](https://github.com/farneser/task-tracker-client/actions/workflows/yarn.yml)
-    * [![Docker Image build](https://github.com/farneser/task-tracker-client/actions/workflows/docker.yml/badge.svg)](https://github.com/farneser/task-tracker-client/actions/workflows/docker.yml)
+### Web API
+
+[![Maven build](https://github.com/farneser/task-tracker-api/actions/workflows/maven.yml/badge.svg)](https://github.com/farneser/task-tracker-api/actions/workflows/maven.yml)
+
+[![Docker Image build](https://github.com/farneser/task-tracker-api/actions/workflows/docker.yml/badge.svg)](https://github.com/farneser/task-tracker-api/actions/workflows/docker.yml)
+
+### Scheduler
+
+[![Maven build](https://github.com/farneser/task-tracker-scheduler/actions/workflows/maven.yml/badge.svg)](https://github.com/farneser/task-tracker-scheduler/actions/workflows/maven.yml)
+
+[![Docker Image Build](https://github.com/farneser/task-tracker-scheduler/actions/workflows/docker.yml/badge.svg)](https://github.com/farneser/task-tracker-scheduler/actions/workflows/docker.yml)
+
+### Email Sender
+
+[![Maven build](https://github.com/farneser/task-tracker-email-sender/actions/workflows/maven.yml/badge.svg)](https://github.com/farneser/task-tracker-email-sender/actions/workflows/maven.yml)
+
+[![Docker Image build](https://github.com/farneser/task-tracker-email-sender/actions/workflows/docker.yml/badge.svg)](https://github.com/farneser/task-tracker-email-sender/actions/workflows/docker.yml)
+
+### Client
+
+[![Build CI](https://github.com/farneser/task-tracker-client/actions/workflows/yarn.yml/badge.svg)](https://github.com/farneser/task-tracker-client/actions/workflows/yarn.yml)
+
+[![Docker Image build](https://github.com/farneser/task-tracker-client/actions/workflows/docker.yml/badge.svg)](https://github.com/farneser/task-tracker-client/actions/workflows/docker.yml)
 
 ## Screenshots
 
